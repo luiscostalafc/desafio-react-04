@@ -7,6 +7,7 @@ import { Container } from "./styles";
 interface InputProps {
   name?: any;
   icon?: any;
+  placeholder?: string;
 }
 
 const Input = ({ name, icon: Icon, ...rest }: InputProps) => {

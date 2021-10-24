@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { FiEdit3, FiTrash } from "react-icons/fi";
 
 import { Container } from "./styles";
@@ -15,14 +15,13 @@ export default function Food(props: FoodProps) {
   const { available } = food;
   const [isAvailable, setIsAvailable] = useState(available);
 
-  const toggleAvailable = async () => {
+  const toggleAvailable = useCallback(async () => {
     await api.put(`/foods/${food.id}`, {
       ...food,
       available: !isAvailable,
     });
-
-    setIsAvailable({ isAvailable: !isAvailable });
-  };
+    setIsAvailable(!isAvailable ? true : false);
+  }, [isAvailable, food]);
 
   const setEditingFood = () => {
     handleEditFood(food);

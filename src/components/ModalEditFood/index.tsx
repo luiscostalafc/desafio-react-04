@@ -24,7 +24,11 @@ export default function ModalEditFood(props: ModalEditFoodProps) {
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-      <Form ref={current} onSubmit={handleSubmit} initialData={editingFood}>
+      <Form
+        ref={current as any}
+        onSubmit={handleSubmit}
+        initialData={editingFood}
+      >
         <h1>Editar Prato</h1>
         <Input name="image" placeholder="Cole o link aqui" />
 

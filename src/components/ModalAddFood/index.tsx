@@ -8,7 +8,7 @@ import Input from "../Input";
 interface ModalAddFoodProps {
   isOpen: boolean;
   setIsOpen: () => void;
-  handleAddFood: () => Promise<void>;
+  handleAddFood: (data: any) => Promise<void>;
 }
 
 export default function ModalAddFood(props: ModalAddFoodProps) {
@@ -16,14 +16,14 @@ export default function ModalAddFood(props: ModalAddFoodProps) {
 
   const { current } = createRef();
 
-  const handleSubmit = async (data) => {
+  const handleSubmit = async (data: any) => {
     handleAddFood(data);
     setIsOpen();
   };
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-      <Form ref={current} onSubmit={handleSubmit}>
+      <Form ref={current as any} onSubmit={handleSubmit}>
         <h1>Novo Prato</h1>
         <Input name="image" placeholder="Cole o link aqui" />
 

@@ -9,7 +9,7 @@ import { FoodsContainer } from "./styles";
 
 export default function Dashboard() {
   const [foods, setFoods] = useState<any>([]);
-  const [editingFood, setEditingFood] = useState({});
+  const [editingFood, setEditingFood] = useState<any>();
   const [modalOpen, setModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
 
@@ -33,8 +33,8 @@ export default function Dashboard() {
         ...food,
         available: true,
       });
-
-      setFoods({ foods: [...foods, response.data] });
+      setFoods((oldState: any) => [...oldState, response.data]);
+      setModalOpen(false);
     } catch (err) {
       console.log(err);
     }
@@ -47,7 +47,7 @@ export default function Dashboard() {
         ...food,
       });
 
-      const foodsUpdated = foods.map((f) =>
+      const foodsUpdated = foods.map((f: any) =>
         f.id !== foodUpdated.data.id ? f : foodUpdated.data
       );
 
@@ -60,7 +60,7 @@ export default function Dashboard() {
   const handleDeleteFood = async (id: string) => {
     await api.delete(`/foods/${id}`);
 
-    const foodsFiltered = foods.filter((food) => food.id !== id);
+    const foodsFiltered = foods.filter((food: any) => food.id !== id);
 
     setEditingFood(foodsFiltered);
   };
@@ -73,7 +73,7 @@ export default function Dashboard() {
     setEditModalOpen(false);
   };
 
-  const handleEditFood = (food) => {
+  const handleEditFood = (food: any) => {
     setEditingFood(food);
     setEditModalOpen(true);
   };
@@ -94,8 +94,8 @@ export default function Dashboard() {
       />
 
       <FoodsContainer data-testid="foods-list">
-        {foods &&
-          foods.map((food) => (
+        {foods?.length &&
+          foods.map((food: any) => (
             <Food
               key={food.id}
               food={food}
