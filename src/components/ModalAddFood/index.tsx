@@ -5,7 +5,13 @@ import { Form } from "./styles";
 import Modal from "../Modal";
 import Input from "../Input";
 
-export default function ModalAddFood(props) {
+interface ModalAddFoodProps {
+  isOpen: boolean;
+  setIsOpen: () => void;
+  handleAddFood: () => Promise<void>;
+}
+
+export default function ModalAddFood(props: ModalAddFoodProps) {
   const { isOpen, setIsOpen, handleAddFood } = props;
 
   const { current } = createRef();
